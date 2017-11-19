@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Centroid {
-    ArrayList<Blog> blogs = new ArrayList<>();
+    ArrayList<Blog> cluster = new ArrayList<>();
     ArrayList<Blog> previousCollection;
 
     // Using the same datastructure to store the centroids
@@ -18,7 +18,12 @@ public class Centroid {
      * of the cluster
      */
     public void recalcCenter() {
-
+        for (int i = 0; i < b.blogWords.size(); i++) {
+            double avg = 0.0;
+            for (Blog b : cluster) { avg += b.blogWords.get(i).getCount(); }
+            avg /= (double)cluster.size();
+            b.blogWords.get(i).count = avg;
+        }
     }
 
     /**
@@ -26,16 +31,16 @@ public class Centroid {
      * centroid so it is not in relation to any blogs
      */
     void reset() {
-        previousCollection = blogs;
-        blogs = new ArrayList<>();
+        previousCollection = cluster;
+        cluster = new ArrayList<>();
     }
 
     /**
      * Determines whether the centroid was moved or not
      */
     public boolean isSame() {
-        return blogs.containsAll(previousCollection) &&
-               previousCollection.containsAll(blogs);
+        return cluster.containsAll(previousCollection) &&
+               previousCollection.containsAll(cluster);
     }
 
     /**
@@ -43,11 +48,6 @@ public class Centroid {
      * @param b
      */
     public void addBlog(Blog b) {
-        blogs.add(b);
-    }
-
-    // Leaking ref, but does not care atm.
-    public ArrayList<Blog> getBlogs() {
-        return blogs;
+        cluster.add(b);
     }
 }

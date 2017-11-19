@@ -1,3 +1,5 @@
+import javafx.beans.binding.DoubleExpression;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -6,7 +8,7 @@ public class KmeansCluster {
 
 
     // Amount of clusters
-    private final int K = 3;
+    private final int K = 2;
 
     public void init() {
 
@@ -24,28 +26,28 @@ public class KmeansCluster {
         ArrayList<Blog> blogs = bdb.getBlogDataBucket();
         Rand r = new Rand(blogs);
 
-        for (int i = 0; i <= K; i++) centroids.add(r.generateRandomCentroid());
+        for (int i = 0; i < K; i++) centroids.add(r.generateRandomCentroid());
 
+        boolean done = false;
+        int iterations = 0;
+        while (!done) {
 
-//        boolean done = false;
-//        int iterations = 0;
-//
-//        while(!done) {
-//
-//            // Recalculate the center for the centroid
-//            centroids.forEach(Centroid::recalcCenter);
-//
-//            done = true;
-//            for (Centroid c : centroids) {
-//                if (!c.isSame()) {
-//                    done = false;
-//                }
-//            }
-//
-//            iterations++;
-//        }
-//
-//        System.out.println("Iterations: " + iterations + ". Centroids: " + centroids.size());
+            assignBlogsToCentroid(blogs);
+
+            // Recalculate the center for the centroid
+            centroids.forEach(Centroid::recalcCenter);
+
+            done = true;
+            for (Centroid c : centroids) {
+                if (!c.isSame()) {
+                    done = false;
+                }
+            }
+
+            iterations++;
+        }
+
+        System.out.println("Iterations: " + iterations + ". Centroids: " + centroids.size());
     }
 
 
@@ -53,29 +55,18 @@ public class KmeansCluster {
         // Remove blogs connected to centroid from last run
         centroids.forEach(Centroid::reset);
 
-        for (Blog blog : blogs) {
-            // Arbitrary centroid as initial candidate for best centroid
-            Centroid candidate = centroids.get(0);
-            double bestDistance = Double.MAX_VALUE;
-
-            for (Centroid centroid : centroids) {
-
-                // This should calculate the distance between a blog and a centroid?
-                double distance = Calculations.calcPearson2();
-
-
-                if (distance < bestDistance) {
-                    // Found closer centroid, this is not candidate
-                    candidate = centroid;
-
-                    // Update the best distance to the distance
-                    // that was smaller than previous distance.
-                    bestDistance = distance;
+        for (Blog b : blogs) {
+            // Starting with arbitrary centroid as best candidate
+            Centroid candidate = null;
+            double closest = Double.MAX_VALUE;
+            for (Centroid c : centroids) {
+                double actualDistance = Calculations.calc_Pearson(b, c.b);
+                if (actualDistance < closest) {
+                    closest = actualDistance;
+                    candidate = c;
                 }
             }
-
-            candidate.addBlog(blog);
+            candidate.addBlog(b);
         }
-
     }
 }

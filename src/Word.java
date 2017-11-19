@@ -1,6 +1,6 @@
 class Word {
-    private String word;
-    private double count;
+    String word;
+    double count;
 
     Word(String word, double count) {
         this.word = word;

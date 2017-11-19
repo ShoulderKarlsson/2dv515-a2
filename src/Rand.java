@@ -3,20 +3,14 @@ import java.util.HashMap;
 import java.util.Random;
 
 class Rand {
-    private ArrayList<Double> randomCounts = new ArrayList<>();
     private Random r = new Random();
-    private ArrayList<Blog> blogs = null;
 
     private HashMap<String, OccurrenceStorage> occurence = new HashMap<>();
 
 
     Rand(ArrayList<Blog> blogs) {
-
-        // Not sure if this is needed
-        this.blogs = blogs;
         this.generateSpanSequence(blogs);
     }
-
 
     /**
      * Generating a HashMap<String, OccurrenceStorage> that includes the word and
