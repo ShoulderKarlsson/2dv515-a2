@@ -4,10 +4,12 @@ public class Centroid {
     ArrayList<Blog> blogs = new ArrayList<>();
     ArrayList<Blog> previousCollection;
 
-    private double position = 0;
+    // Using the same datastructure to store the centroids
+    // "position" as I store the blog entries.
+    Blog b = null;
 
-    Centroid(double position) {
-        this.position = position;
+    Centroid(Blog b) {
+        this.b = b;
     }
 
     /**
@@ -16,7 +18,7 @@ public class Centroid {
      * of the cluster
      */
     public void recalcCenter() {
-        
+
     }
 
     /**
@@ -32,9 +34,9 @@ public class Centroid {
      * Determines whether the centroid was moved or not
      */
     public boolean isSame() {
-        return blogs.containsAll(previousCollection) && previousCollection.containsAll(blogs);
+        return blogs.containsAll(previousCollection) &&
+               previousCollection.containsAll(blogs);
     }
-
 
     /**
      * Connect a blog to the specific cluster
@@ -42,10 +44,6 @@ public class Centroid {
      */
     public void addBlog(Blog b) {
         blogs.add(b);
-    }
-
-    public double getPosition() {
-        return this.position;
     }
 
     // Leaking ref, but does not care atm.

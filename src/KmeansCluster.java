@@ -23,12 +23,9 @@ public class KmeansCluster {
     private void doStuff(BlogDataBucket bdb) {
         ArrayList<Blog> blogs = bdb.getBlogDataBucket();
         Rand r = new Rand(blogs);
-        for (int i = 0; i <= this.K; i++) {
-            centroids.add(new Centroid(r.getRandom()));
-        }
 
+        for (int i = 0; i <= K; i++) centroids.add(r.generateRandomCentroid());
 
-        assignBlogsToCentroid(blogs);
 
 //        boolean done = false;
 //        int iterations = 0;
