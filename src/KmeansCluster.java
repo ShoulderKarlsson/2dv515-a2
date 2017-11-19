@@ -1,16 +1,13 @@
-import javafx.beans.binding.DoubleExpression;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class KmeansCluster {
-    ArrayList<Centroid> centroids = new ArrayList<>();
-
+class KmeansCluster {
+    private ArrayList<Centroid> centroids = new ArrayList<>();
 
     // Amount of clusters
-    private final int K = 2;
+    private final int K = 5;
 
-    public void init() {
+    void init() {
 
         String fileContent = null;
         try {
@@ -19,19 +16,17 @@ public class KmeansCluster {
             e.printStackTrace();
         }
 
-        doStuff(new BlogDataBucket(fileContent));
+        this.createKMeansCluster(new BlogDataBucket(fileContent));
     }
 
-    private void doStuff(BlogDataBucket bdb) {
+    private void createKMeansCluster(BlogDataBucket bdb) {
         ArrayList<Blog> blogs = bdb.getBlogDataBucket();
         Rand r = new Rand(blogs);
-
         for (int i = 0; i < K; i++) centroids.add(r.generateRandomCentroid());
 
         boolean done = false;
         int iterations = 0;
         while (!done) {
-
             assignBlogsToCentroid(blogs);
 
             // Recalculate the center for the centroid
@@ -46,6 +41,7 @@ public class KmeansCluster {
 
             iterations++;
         }
+        System.out.println(centroids);
 
         System.out.println("Iterations: " + iterations + ". Centroids: " + centroids.size());
     }

@@ -36,7 +36,6 @@ class Rand {
         }
     }
 
-
     Centroid generateRandomCentroid() {
         Blog b = new Blog("");
         occurence.keySet()
