@@ -10,7 +10,7 @@ class KmeansCluster {
 
     // Amount of clusters
     private final int K = 4;
-    ArrayList<Centroid> doCluster() {
+    ArrayList<Centroid> init() {
         String fileContent = null;
         try {
             fileContent = FileHandler.readFileContent(ResourceUtils.getFile("classpath:blogdata.txt"));

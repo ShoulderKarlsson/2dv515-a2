@@ -12,7 +12,7 @@ public class KmeansController {
     @ResponseBody
     public String kmeans() {
         KmeansCluster cluster = new KmeansCluster();
-        ArrayList<Centroid> clusters = cluster.doCluster();
+        ArrayList<Centroid> clusters = cluster.init();
         StringBuilder value = new StringBuilder();
 
         for (Centroid c : clusters) {
