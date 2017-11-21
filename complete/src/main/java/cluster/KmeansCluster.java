@@ -1,4 +1,6 @@
-package hello;
+package cluster;
+
+import org.springframework.util.ResourceUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ class KmeansCluster {
     ArrayList<Centroid> doCluster() {
         String fileContent = null;
         try {
-            fileContent = FileHandler.readFileContent("/home/shoulder/Documents/school/ai-2dv515/gs-rest-service/complete/src/main/java/hello/blogdata.txt");
+            fileContent = FileHandler.readFileContent(ResourceUtils.getFile("classpath:blogdata.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,8 +30,6 @@ class KmeansCluster {
         int iterations = 0;
         while (!done) {
             assignBlogsToCentroid(blogs);
-
-            // Recalculate the center for the centroid
             centroids.forEach(Centroid::recalcCenter);
 
             done = true;

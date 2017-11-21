@@ -1,11 +1,12 @@
-package hello;
+package cluster;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class FileHandler {
-    public static String readFileContent(String path) throws IOException {
+    public static String readFileContent(File path) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
         StringBuilder sb = new StringBuilder();
         String line;

@@ -1,4 +1,4 @@
-package hello;
+package cluster;
 
 class Calculations {
     static double calc_Pearson(Blog a, Blog b) {

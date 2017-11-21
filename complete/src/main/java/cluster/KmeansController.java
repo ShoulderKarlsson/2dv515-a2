@@ -1,4 +1,4 @@
-package hello;
+package cluster;
 
 import java.util.ArrayList;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController {
-    @RequestMapping(value = "/kmeans" /*produces = MediaType.APPLICATION_JSON_VALUE*/)
+public class KmeansController {
+    @RequestMapping(value = "/kmeans")
     @ResponseBody
     public String kmeans() {
         KmeansCluster cluster = new KmeansCluster();
@@ -21,9 +21,9 @@ public class GreetingController {
             for (Blog b : c.cluster) {
                 value
                         .append("<li>")
-                        .append("<h3>")
+                        .append("<p>")
                         .append(b.blogName)
-                        .append("</h3>")
+                        .append("</p>")
                         .append("</li>");
             }
             value
@@ -31,7 +31,6 @@ public class GreetingController {
                     .append("<hr/>");
 
         }
-
 
         return value.toString();
     }

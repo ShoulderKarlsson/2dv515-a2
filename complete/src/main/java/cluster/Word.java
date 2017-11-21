@@ -1,4 +1,4 @@
-package hello;
+package cluster;
 
 class Word {
     String word;
