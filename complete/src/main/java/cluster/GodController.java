@@ -1,17 +1,35 @@
 package cluster;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.*;
+
 @RestController
-public class KmeansController {
+public class GodController {
+    BlogDataBucket dataBucket = null;
+
+    GodController() {
+        String fileContent = null;
+        try {
+            fileContent = FileHandler.readFileContent(ResourceUtils.getFile("classpath:blogdata.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dataBucket = new BlogDataBucket(fileContent);
+    }
+
+
     @RequestMapping(value = "/kmeans")
     @ResponseBody
     public String kmeans() {
-        KmeansCluster cluster = new KmeansCluster();
+        KmeansCluster cluster = new KmeansCluster(dataBucket);
         ArrayList<Centroid> clusters = cluster.init();
         StringBuilder value = new StringBuilder();
 
@@ -33,5 +51,17 @@ public class KmeansController {
         }
 
         return value.toString();
+    }
+
+    @RequestMapping(value = "/heir")
+    @ResponseBody
+    public String hier() {
+        HierarchicalClustering hc = new HierarchicalClustering(dataBucket);
+        hc.generateHierCluster();
+
+        return hc.someThingElse();
+
+//        return "Hejsan";
+
     }
 }

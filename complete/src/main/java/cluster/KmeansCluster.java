@@ -8,21 +8,19 @@ import java.util.ArrayList;
 class KmeansCluster {
     private ArrayList<Centroid> centroids = new ArrayList<>();
 
-    // Amount of clusters
-    private final int K = 4;
-    ArrayList<Centroid> init() {
-        String fileContent = null;
-        try {
-            fileContent = FileHandler.readFileContent(ResourceUtils.getFile("classpath:blogdata.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private BlogDataBucket dataBucket = null;
 
-        return this.createKMeansCluster(new BlogDataBucket(fileContent));
+    KmeansCluster(BlogDataBucket dataBucket) {
+        this.dataBucket = dataBucket;
     }
 
-    private ArrayList<Centroid> createKMeansCluster(BlogDataBucket bdb) {
-        ArrayList<Blog> blogs = bdb.getBlogDataBucket();
+    private final int K = 4;
+    ArrayList<Centroid> init() {
+        return this.createKMeansCluster();
+    }
+
+    private ArrayList<Centroid> createKMeansCluster(/*BlogDataBucket bdb*/) {
+        ArrayList<Blog> blogs = this.dataBucket.getBlogDataBucket();
         Rand r = new Rand(blogs);
         for (int i = 0; i < K; i++) centroids.add(r.generateRandomCentroid());
 
@@ -41,7 +39,6 @@ class KmeansCluster {
 
             iterations++;
         }
-        System.out.println("Iterations: " + iterations + ". Centroids: " + centroids.size());
         return centroids;
     }
 
