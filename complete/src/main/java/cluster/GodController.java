@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.*;
-
 @RestController
 public class GodController {
     BlogDataBucket dataBucket = null;
@@ -57,11 +55,8 @@ public class GodController {
     @ResponseBody
     public String hier() {
         HierarchicalClustering hc = new HierarchicalClustering(dataBucket);
-        hc.generateHierCluster();
+        hc.makeHierCluster();
 
-        return hc.someThingElse();
-
-//        return "Hejsan";
-
+        return hc.getClusterTree();
     }
 }

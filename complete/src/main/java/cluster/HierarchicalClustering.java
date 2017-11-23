@@ -8,18 +8,22 @@ class HierarchicalClustering {
     HierarchicalClustering(BlogDataBucket dataBucket) {
         blogs = dataBucket.getBlogDataBucket();
         generateStartingClusters();
-        while (clusters.size() > 1) {
-            generateHierCluster();
-        }
+
+        while (clusters.size() > 1) generateHierCluster();
     }
 
-    String someThingElse() {
+    String getClusterTree() {
         HTMLTree htmlTree = new HTMLTree();
         return htmlTree.generateTree(clusters);
     }
 
+    public void makeHierCluster() {
+        while(clusters.size() > 1) generateHierCluster();
+    }
 
-    public void generateHierCluster() {
+
+
+    private void generateHierCluster() {
         double closest = Double.MAX_VALUE;
         Cluster bestA = null;
         Cluster bestB = null;
