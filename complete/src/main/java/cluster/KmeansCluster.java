@@ -15,7 +15,7 @@ class KmeansCluster {
     }
 
     private final int K = 4;
-    ArrayList<Centroid> init() {
+    ArrayList<Centroid> makeKmeansCluster() {
         return this.createKMeansCluster();
     }
 
@@ -25,7 +25,6 @@ class KmeansCluster {
         for (int i = 0; i < K; i++) centroids.add(r.generateRandomCentroid());
 
         boolean done = false;
-        int iterations = 0;
         while (!done) {
             assignBlogsToCentroid(blogs);
             centroids.forEach(Centroid::recalcCenter);
@@ -36,8 +35,6 @@ class KmeansCluster {
                     done = false;
                 }
             }
-
-            iterations++;
         }
         return centroids;
     }

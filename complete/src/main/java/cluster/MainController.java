@@ -1,18 +1,16 @@
 package cluster;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GodController {
+public class MainController {
     BlogDataBucket dataBucket = null;
 
-    GodController() {
+    MainController() {
         String fileContent = null;
         try {
             fileContent = FileHandler.readFileContent(ResourceUtils.getFile("classpath:blogdata.txt"));
@@ -28,7 +26,7 @@ public class GodController {
     @ResponseBody
     public String kmeans() {
         KmeansCluster cluster = new KmeansCluster(dataBucket);
-        ArrayList<Centroid> clusters = cluster.init();
+        ArrayList<Centroid> clusters = cluster.makeKmeansCluster();
         StringBuilder value = new StringBuilder();
 
         for (Centroid c : clusters) {

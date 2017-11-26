@@ -8,8 +8,6 @@ class HierarchicalClustering {
     HierarchicalClustering(BlogDataBucket dataBucket) {
         blogs = dataBucket.getBlogDataBucket();
         generateStartingClusters();
-
-        while (clusters.size() > 1) generateHierCluster();
     }
 
     String getClusterTree() {
@@ -17,7 +15,7 @@ class HierarchicalClustering {
         return htmlTree.generateTree(clusters);
     }
 
-    public void makeHierCluster() {
+    void makeHierCluster() {
         while(clusters.size() > 1) generateHierCluster();
     }
 

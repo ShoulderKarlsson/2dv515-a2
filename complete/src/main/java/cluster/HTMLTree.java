@@ -1,12 +1,12 @@
 package cluster;
 
-import javax.swing.tree.DefaultMutableTreeNode;
+//import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 
 public class HTMLTree {
     ArrayList<String> html = new ArrayList<>();
 
-    public String generateTree(ArrayList<Cluster> clusters) {
+    String generateTree(ArrayList<Cluster> clusters) {
         html.add("<ul>");
         html.add("</ul>");
         addNodes(1, clusters.get(0));
@@ -20,7 +20,7 @@ public class HTMLTree {
     }
 
 
-    public void addNodes(int i, Cluster c) {
+    private void addNodes(int i, Cluster c) {
         if (c.right != null) {
             String blg = c.right.toString();
             if (blg.equals("")) {
@@ -48,17 +48,17 @@ public class HTMLTree {
         }
     }
 
-    public void addNodes(DefaultMutableTreeNode tnode, Cluster c) {
-        if (c.left != null) {
-            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.left.toString());
-            tnode.add(nNode);
-            addNodes(nNode, c.left);
-        }
-
-        if (c.right != null) {
-            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.right.toString());
-            tnode.add(nNode);
-            addNodes(nNode, c.right);
-        }
-    }
+//    public void addNodes(DefaultMutableTreeNode tnode, Cluster c) {
+//        if (c.left != null) {
+//            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.left.toString());
+//            tnode.add(nNode);
+//            addNodes(nNode, c.left);
+//        }
+//
+//        if (c.right != null) {
+//            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.right.toString());
+//            tnode.add(nNode);
+//            addNodes(nNode, c.right);
+//        }
+//    }
 }
