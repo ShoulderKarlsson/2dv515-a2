@@ -1,6 +1,5 @@
 package cluster;
 
-//import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 
 public class HTMLTree {
@@ -47,18 +46,4 @@ public class HTMLTree {
             addNodes(i + 1, c.left);
         }
     }
-
-//    public void addNodes(DefaultMutableTreeNode tnode, Cluster c) {
-//        if (c.left != null) {
-//            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.left.toString());
-//            tnode.add(nNode);
-//            addNodes(nNode, c.left);
-//        }
-//
-//        if (c.right != null) {
-//            DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.right.toString());
-//            tnode.add(nNode);
-//            addNodes(nNode, c.right);
-//        }
-//    }
 }
